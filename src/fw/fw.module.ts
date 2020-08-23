@@ -8,6 +8,8 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { StatusBarComponent } from './status-bar/status-bar.component';
 import { ScreenLarge } from './directives/screen-large.directive';
 import { ScreenBelowLarge } from './directives/screen-below-large.directive';
+import { MenuComponent } from './menus/menu/menu.component';
+import { MenuItemComponent } from './menus/menu-item/menu-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ScreenBelowLarge } from './directives/screen-below-large.directive';
     TopBarComponent,
     StatusBarComponent,
     ScreenLarge,
-    ScreenBelowLarge
+    ScreenBelowLarge,
+    MenuComponent,
+    MenuItemComponent
   ],
   imports: [
     CommonModule

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
 import { FrameworkConfigSettings, FrameworkConfigService} from '../fw/services/framework-config.service';
+import { MenuService  } from '../fw/services/menu.service';
+import { initialMentuItems } from './app.menu';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,8 @@ import { FrameworkConfigSettings, FrameworkConfigService} from '../fw/services/f
 })
 export class AppComponent {
 
-  constructor(private frameworkconfigService: FrameworkConfigService) {
+  constructor(private frameworkconfigService: FrameworkConfigService, 
+    private menuService: MenuService) {
 
     let config: FrameworkConfigSettings = {
       socialIcons: [
@@ -24,5 +27,6 @@ export class AppComponent {
     };
 
     frameworkconfigService.configure(config);
+    menuService.items = initialMentuItems;
   }
 }
