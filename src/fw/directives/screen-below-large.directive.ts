@@ -14,6 +14,7 @@ export class ScreenBelowLarge implements OnDestroy {
         private viewContainer: ViewContainerRef,
         private templateRef : TemplateRef<Object>){
         this.screenSubscription = screenService.resize$.subscribe(() => this.onResize());
+        this.screenBelowLarge = false;
     }
 
     @Input()

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from '../services/menu.service';
+import { ScreenService } from '../services/screen.service';
 
 @Component({
   selector: 'fw-content',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor() { }
+  menuService : MenuService;
+  screenService: ScreenService;
+
+  constructor(private mnService: MenuService,
+      private scrService: ScreenService) {
+    this.menuService = mnService;
+    this.screenService = scrService;
+   }
 
   ngOnInit(): void {
   }

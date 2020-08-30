@@ -13,12 +13,14 @@ export class ScreenLarge implements OnDestroy {
     constructor(private screenService : ScreenService, 
         private viewContainer: ViewContainerRef,
         private templateRef : TemplateRef<Object>){
+        //console.log('...Directive is created...')
         this.screenSubscription = screenService.resize$.subscribe(() => this.onResize());
+        this.screenLarge = false;
     }
 
     @Input()
     set screenLarge(condition){
-        //console.log("Screen Large Called....");
+        console.log("Screen Large Called....");
         condition = this.screenService.screenWidth >= this.screenService.largeBreakpoint;
         if(condition && !this.hasView){
             this.hasView = true;
