@@ -11,6 +11,7 @@ import { ScreenLarge } from './directives/screen-large.directive';
 import { ScreenBelowLarge } from './directives/screen-below-large.directive';
 import { MenuComponent } from './menus/menu/menu.component';
 import { MenuItemComponent } from './menus/menu-item/menu-item.component';
+import { PopupMenuComponent } from './menus/popup-menu/popup-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MenuItemComponent } from './menus/menu-item/menu-item.component';
     ScreenLarge,
     ScreenBelowLarge,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    PopupMenuComponent
   ],
   imports: [
     CommonModule,
