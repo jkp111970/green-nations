@@ -21,7 +21,7 @@ export class AppComponent {
         { imageFile: 'assets/social-twitter-bw.png', alt: 'Facebook', link: 'http://www.twitter.com' }
       ],
       showLanguageSelector: true,
-      showUserControls: true,
+      showUserControls: true,           
       showStatusBar: true,
       showStatusBarBreakpoint: 800
     };
