@@ -8,7 +8,7 @@ import { ScreenService } from '../services/screen.service';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-
+  
   menuService : MenuService;
   screenService: ScreenService;
 

@@ -12,6 +12,9 @@ import { applicationRoutes } from './app.routes';
 import { CountryDetailComponent } from './country-detail/country-detail.component';
 import { CountryListComponent } from './country-list/country-list.component';
 import { CountryMaintComponent } from './country-maint/country-maint.component';
+import { AuthenticatedUsersComponent } from './authenticated-users/authenticated-users.component';
+import { UserServiceApi } from './services/UserServiceApi';
+import { AuthGaurd } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { CountryMaintComponent } from './country-maint/country-maint.component';
     SettingsComponent,
     CountryDetailComponent,
     CountryListComponent,
-    CountryMaintComponent
+    CountryMaintComponent,
+    AuthenticatedUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,8 @@ import { CountryMaintComponent } from './country-maint/country-maint.component';
     RouterModule.forRoot(applicationRoutes)
   ],
   providers: [
+    UserServiceApi,
+    AuthGaurd
   ],
   bootstrap: [AppComponent]
 })
