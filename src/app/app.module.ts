@@ -14,6 +14,7 @@ import { CountryListComponent } from './country-list/country-list.component';
 import { CountryMaintComponent } from './country-maint/country-maint.component';
 import { AuthenticatedUsersComponent } from './authenticated-users/authenticated-users.component';
 import { UserServiceApi } from './services/UserServiceApi';
+import { UserApi } from '../fw/services/UserApi';
 import { AuthGaurd } from './services/auth-guard.service';
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AuthGaurd } from './services/auth-guard.service';
   ],
   providers: [
     UserServiceApi,
-    AuthGaurd
+    AuthGaurd,
+    {provide: UserApi, useExisting: UserServiceApi}
   ],
   bootstrap: [AppComponent]
 })
