@@ -1,1 +1,19 @@
-<p>country-maint works!</p>
+Add Country <button value="add" (click)="addCountry()">Add</button>
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>EPI</th>
+        <th>Action</th>
+    </thead>
+    <tr *ngFor="let row of countries">
+        <td>{{row.id}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.epiIndex}}</td>
+        <td>
+            <button value="detail" (click)="showCountry(row.id)">detail</button>
+            <button value="edit" (click)="editCountry(row.id)">edit</button>
+            <button value="delete">delete</button>
+        </td>
+    </tr>
+</table>

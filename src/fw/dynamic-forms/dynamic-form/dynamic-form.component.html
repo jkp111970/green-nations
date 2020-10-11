@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+
+<div *ngFor="let field of fields">
+    <fw-dynamic-form-field
+        [form]="form"
+        [field]="field"
+        [action]="action"
+    >
+    </fw-dynamic-form-field>
+</div>
+
+<br/>
+<button (click)="goTobackPage()">Back</button>
+
+</form>

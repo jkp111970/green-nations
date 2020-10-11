@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { CountryService } from '../services/country-service';
+import { Country } from '../view-model/country';
 
 @Component({
   selector: 'app-country-maint',
@@ -7,9 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryMaintComponent implements OnInit {
 
-  constructor() { }
+  constructor(private countryService: CountryService,
+    private router: Router) { }
+
+  countries : Array<Country>;
 
   ngOnInit(): void {
+    this.countries = this.countryService.getCountries();
+  }
+
+  addCountry(): void {
+    this.router.navigate(['/authenticated/country-detail',0,'add']);
+  }
+
+  showCountry(id: number): void{
+    this.router.navigate(['/authenticated/country-detail',id,'read']);
+  }
+
+  editCountry(id: number): void{
+    this.router.navigate(['/authenticated/country-detail',id,'update']);
   }
 
 }

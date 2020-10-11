@@ -16,6 +16,7 @@ import { AuthenticatedUsersComponent } from './authenticated-users/authenticated
 import { UserServiceApi } from './services/UserServiceApi';
 import { UserApi } from '../fw/services/UserApi';
 import { AuthGaurd } from './services/auth-guard.service';
+import { CountryService } from './services/country-service';
 
 @NgModule({
   declarations: [
@@ -31,13 +32,14 @@ import { AuthGaurd } from './services/auth-guard.service';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    FwModule,
-    RouterModule.forRoot(applicationRoutes)
+    RouterModule.forRoot(applicationRoutes),
+    FwModule
   ],
   providers: [
     UserServiceApi,
     AuthGaurd,
-    {provide: UserApi, useExisting: UserServiceApi}
+    {provide: UserApi, useExisting: UserServiceApi},
+    CountryService
   ],
   bootstrap: [AppComponent]
 })
