@@ -20,7 +20,7 @@ export class UserServiceApi implements UserApi {
         this.authenticated = true;
         
         return of({})
-                .pipe(delay(2000));
+                .pipe(delay(100));
                 //.pipe(flatMap(x=> Observable.throw("Invalid UserName and Password")));
                 
     }

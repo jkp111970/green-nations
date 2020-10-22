@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { FieldDefinition } from '../fielddefinition';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -21,6 +21,9 @@ export class DynamicFormComponent implements OnInit {
   fieldsDataCopy : any;  
 
   @Input()
+  errorMessage: string;
+
+  @Input()
   action: string;
 
   @Output()
@@ -29,17 +32,28 @@ export class DynamicFormComponent implements OnInit {
   create : EventEmitter<any> = new EventEmitter();
 
   form : FormGroup;
-  
+  submitted: boolean = false;
+  status: string;
+
   ngOnInit(): void {
     this.clearForm();
+
     this.route.params.subscribe(params => {
       this.action = params['action'];
       this.clearForm();
     });
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['errorMessage'].currentValue && this.status==="waiting") {
+      this.status="";
+    }
+  }
+
   clearForm(): void {
     //new replica copy object
+    this.errorMessage = null;
+    this.status = null;
     this.fieldsDataCopy = Object.assign({},this.fieldsData);
     let group = {};
     this.fields.forEach(field => {
@@ -53,8 +67,8 @@ export class DynamicFormComponent implements OnInit {
   }
 
   goTobackPage(): void {
-    //console.log("######## Going to Back Page");
-    this.location.back();    
+    this.errorMessage=null;
+    this.location.back();
   }
 
   onCancel(){
@@ -67,13 +81,19 @@ export class DynamicFormComponent implements OnInit {
   }
 
   processRequest() : void {
-    if(this.action == "update"){
-      this.update.emit(this.form.value);
+    this.errorMessage = null;
+    this.status = "waiting";
+    this.submitted = true;
+    if(this.form.valid) {
+      if(this.action === "update") {
+        this.update.emit(this.form.value);
+      }
+      if(this.action === "add") {
+        this.create.emit(this.form.value);
+      }
+    } else {
+      console.log("Form is not valid...");
     }
-    if(this.action == "add"){
-      this.create.emit(this.form.value);
-    }
-    
   }
 
 }

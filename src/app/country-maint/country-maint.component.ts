@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { CountryService } from '../services/country-service';
 import { Country } from '../view-model/country';
@@ -15,11 +16,15 @@ export class CountryMaintComponent implements OnInit {
     private router: Router) { }
 
   countries : Array<Country>;
-  isDeleting : Boolean = false;
+  isDeleting : boolean = false;
   deleteCountryId : number;
+  deleteError: string;
 
   ngOnInit(): void {
-    this.countries = this.countryService.getCountries();
+    let obserable : Observable<any> = this.countryService.getCountries();
+    obserable.subscribe( response => {
+      this.countries = response;
+    });
   }
 
   addCountry(): void {
@@ -37,6 +42,7 @@ export class CountryMaintComponent implements OnInit {
   confirmDeleteCountry(id: number) : void {
     this.isDeleting = true;
     this.deleteCountryId = id;
+    this.deleteError = null;
   }
 
   cancelDelete(): void {
@@ -44,8 +50,13 @@ export class CountryMaintComponent implements OnInit {
   }
 
   deleteCountry(id: number) : void {
-    this.countryService.deleteCountry(id);
-    this.isDeleting = false;
+    let observable = this.countryService.deleteCountry(id);
+    observable.subscribe(
+      response => { this.cancelDelete(); },
+      err => {
+        this.deleteError = err;
+      }
+    );
   }
 
 }

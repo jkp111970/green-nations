@@ -15,17 +15,16 @@ Add Country <button class="btn btn-sm btn-primary" value="add" (click)="addCount
         <td>{{row.name}}</td>
         <td>{{row.epiIndex}}</td>
         <td>{{row.currency}}</td>
-        <td>
-            <div *ngIf="!isDeleting || row.id!=deleteCountryId">
-                <button class="btn btn-sm btn-primary" value="detail" (click)="showCountry(row.id)">Detail</button>
-                <button class="btn btn-sm btn-warning" value="edit" (click)="editCountry(row.id)">Edit</button>
-                <button class="btn btn-sm btn-danger" value="confirm" (click)="confirmDeleteCountry(row.id)">Delete</button>
-            </div>
-            <div *ngIf="isDeleting && row.id == deleteCountryId">
-                Delete this country?
-                <button class="btn btn-sm btn-danger" value="delete" (click)="deleteCountry(row.id)">Confirm</button>
-                <button class="btn btn-sm" value="cancelDelete" (click)="cancelDelete()">Cancel</button>
-            </div>
+        <td *ngIf="!isDeleting || row.id!=deleteCountryId">
+            <button class="btn btn-sm btn-primary" value="detail" (click)="showCountry(row.id)">Detail</button>
+            <button class="btn btn-sm btn-warning" value="edit" (click)="editCountry(row.id)">Edit</button>
+            <button class="btn btn-sm btn-danger" value="confirm" (click)="confirmDeleteCountry(row.id)">Delete</button>
+        </td>
+        <td *ngIf="isDeleting && row.id == deleteCountryId">
+            Delete this country?
+            <button class="btn btn-sm btn-danger" value="delete" (click)="deleteCountry(row.id)">Confirm</button>
+            <button class="btn btn-sm" value="cancelDelete" (click)="cancelDelete()">Cancel</button>
+            <p *ngIf="deleteError" class="alert alert-danger">{{deleteError}}</p>
         </td>
     </tr>
 </table>

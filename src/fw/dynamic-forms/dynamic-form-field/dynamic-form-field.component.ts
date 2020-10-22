@@ -17,6 +17,8 @@ export class DynamicFormFieldComponent implements OnInit {
   action: string;
   @Input()
   form: FormGroup;
+  @Input()
+  submitted: boolean;
 
   ngOnInit(): void {
   }
