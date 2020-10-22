@@ -15,6 +15,8 @@ export class CountryMaintComponent implements OnInit {
     private router: Router) { }
 
   countries : Array<Country>;
+  isDeleting : Boolean = false;
+  deleteCountryId : number;
 
   ngOnInit(): void {
     this.countries = this.countryService.getCountries();
@@ -30,6 +32,20 @@ export class CountryMaintComponent implements OnInit {
 
   editCountry(id: number): void{
     this.router.navigate(['/authenticated/country-detail',id,'update']);
+  }
+
+  confirmDeleteCountry(id: number) : void {
+    this.isDeleting = true;
+    this.deleteCountryId = id;
+  }
+
+  cancelDelete(): void {
+    this.isDeleting = false;
+  }
+
+  deleteCountry(id: number) : void {
+    this.countryService.deleteCountry(id);
+    this.isDeleting = false;
   }
 
 }

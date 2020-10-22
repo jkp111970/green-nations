@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { FieldDefinition } from '../fielddefinition';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'fw-dynamic-form',
@@ -10,7 +11,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class DynamicFormComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  constructor(private location: Location,
+    private router: Router, private route: ActivatedRoute) { }
 
   @Input()
   fields : Array<FieldDefinition>;
@@ -21,10 +23,19 @@ export class DynamicFormComponent implements OnInit {
   @Input()
   action: string;
 
+  @Output()
+  update : EventEmitter<any> = new EventEmitter();
+  @Output()
+  create : EventEmitter<any> = new EventEmitter();
+
   form : FormGroup;
   
   ngOnInit(): void {
     this.clearForm();
+    this.route.params.subscribe(params => {
+      this.action = params['action'];
+      this.clearForm();
+    });
   }
 
   clearForm(): void {
@@ -44,6 +55,25 @@ export class DynamicFormComponent implements OnInit {
   goTobackPage(): void {
     //console.log("######## Going to Back Page");
     this.location.back();    
+  }
+
+  onCancel(){
+    this.fieldsData = this.fieldsDataCopy;
+    this.clearForm();
+  }
+
+  onEdit(){
+    this.router.navigate(['../','update'], {relativeTo: this.route});
+  }
+
+  processRequest() : void {
+    if(this.action == "update"){
+      this.update.emit(this.form.value);
+    }
+    if(this.action == "add"){
+      this.create.emit(this.form.value);
+    }
+    
   }
 
 }

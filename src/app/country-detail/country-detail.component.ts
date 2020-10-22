@@ -19,7 +19,8 @@ export class CountryDetailComponent implements OnInit {
   countryFields : Array<FieldDefinition> = [
     {key:"id",type:"number",isId:true,label:"Id",required:true},
     {key:"name",type:"string",isId:false,label:"Name",required:true},
-    {key:"epiIndex",type:"number",isId:false,label:"EPI Index",required:true}
+    {key:"epiIndex",type:"number",isId:false,label:"EPI Index",required:true},
+    {key:"currency",type:"string",isId:false,label:"currency",required:true}
   ];
   action: string;
 
@@ -29,6 +30,19 @@ export class CountryDetailComponent implements OnInit {
     //console.log("Country Id is:"+cntrId);
     //console.log("Action is:"+action);
     this.country = this.countryService.getCountry(cntrId);
+  }
+
+  updateContryDetails(cntry: Country) : void {
+    console.log("####### Captured update event in contry details");
+    this.countryService.updateCountry(cntry);
+    this.router.navigate(["/authenticated/country-maint"]);
+  }
+
+  createContryDetails(cntry: Country): void {
+    console.log("####### Captured create event in contry details");
+    console.log(cntry.name);
+    this.countryService.createCountry(cntry);
+    this.router.navigate(["/authenticated/country-maint"]);
   }
 
 }

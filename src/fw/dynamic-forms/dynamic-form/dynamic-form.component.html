@@ -1,15 +1,24 @@
-<form [formGroup]="form">
+<div>
+    <form [formGroup]="form">
 
-<div *ngFor="let field of fields">
-    <fw-dynamic-form-field
-        [form]="form"
-        [field]="field"
-        [action]="action"
-    >
-    </fw-dynamic-form-field>
+        <div *ngFor="let field of fields">
+            <fw-dynamic-form-field [form]="form" [field]="field" [action]="action">
+            </fw-dynamic-form-field>
+        </div>
+
+        <div *ngIf="action === 'add'">
+            <button type="button" class="btn btn-secondary" (click)="goTobackPage()">Back</button>
+            <button type="button" class="btn btn-primary" (click)="processRequest()">Create</button>
+        </div>
+        <div *ngIf="action === 'update'">
+            <button type="button" class="btn" (click)="goTobackPage()">Back</button>
+            <button type="button" class="btn" (click)="onCancel()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="processRequest()">Save</button>
+        </div>
+        <div *ngIf="action === 'read'">
+            <button type="button" class="btn" (click)="goTobackPage()">Back</button>
+            <button type="button" class="btn btn-primary" (click)="onEdit()">Edit</button>
+        </div>
+
+    </form>
 </div>
-
-<br/>
-<button (click)="goTobackPage()">Back</button>
-
-</form>

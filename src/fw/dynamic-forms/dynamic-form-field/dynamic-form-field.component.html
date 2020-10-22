@@ -1,14 +1,14 @@
 <div [formGroup]="form">
 
-    <div *ngIf="field.type == 'string'">
+    <div *ngIf="field.type == 'string'" class="form-group">
         <label [htmlFor]="field.key">{{field.label}}</label>
-        <input type="text" [formControlName]="field.key"  [readonly]="action == 'read' || field.isId"
+        <input type="text" class="form-control" [formControlName]="field.key"  [readonly]="action == 'read' || field.isId"
             [id]="field.key" [required]="field.required">
     </div>
 
-    <div *ngIf="field.type == 'number'">
+    <div *ngIf="field.type == 'number'" class="form-group">
         <label [htmlFor]="field.key">{{field.label}}</label>
-        <input type="number" [formControlName]="field.key" [readonly]="action == 'read' || field.isId"
+        <input type="number" class="form-control" [formControlName]="field.key" [readonly]="action == 'read' || field.isId"
             [id]="field.key" [required]="field.required">
     </div>
 

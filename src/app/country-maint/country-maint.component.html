@@ -1,19 +1,31 @@
-Add Country <button value="add" (click)="addCountry()">Add</button>
+Add Country <button class="btn btn-sm btn-primary" value="add" (click)="addCountry()">Add</button>
 <table>
     <thead>
-        <th>Id</th>
-        <th>Name</th>
-        <th>EPI</th>
-        <th>Action</th>
+        <tr>
+            <th style="width: 25px">Id</th>
+            <th style="width: 200px">Name</th>
+            <th style="width: 70px">EPI</th>
+            <th>currency</th>
+            <th>Action</th>
+
+        </tr>
     </thead>
     <tr *ngFor="let row of countries">
         <td>{{row.id}}</td>
         <td>{{row.name}}</td>
         <td>{{row.epiIndex}}</td>
+        <td>{{row.currency}}</td>
         <td>
-            <button value="detail" (click)="showCountry(row.id)">detail</button>
-            <button value="edit" (click)="editCountry(row.id)">edit</button>
-            <button value="delete">delete</button>
+            <div *ngIf="!isDeleting || row.id!=deleteCountryId">
+                <button class="btn btn-sm btn-primary" value="detail" (click)="showCountry(row.id)">Detail</button>
+                <button class="btn btn-sm btn-warning" value="edit" (click)="editCountry(row.id)">Edit</button>
+                <button class="btn btn-sm btn-danger" value="confirm" (click)="confirmDeleteCountry(row.id)">Delete</button>
+            </div>
+            <div *ngIf="isDeleting && row.id == deleteCountryId">
+                Delete this country?
+                <button class="btn btn-sm btn-danger" value="delete" (click)="deleteCountry(row.id)">Confirm</button>
+                <button class="btn btn-sm" value="cancelDelete" (click)="cancelDelete()">Cancel</button>
+            </div>
         </td>
     </tr>
 </table>

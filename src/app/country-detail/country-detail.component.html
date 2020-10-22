@@ -5,17 +5,7 @@ Welcome to Country Details
     [fields]="countryFields"
     [fieldsData]="country"
     [action]="action"
+    (update)="updateContryDetails($event)"
+    (create)="createContryDetails($event)"
 >
 </fw-dynamic-form>
-
-
-<!--
-<p>country-detail works!</p>
-Country id: {{country.id}}
-<br/>
-Country Name: {{country.name}}
-<br/>
-Country EPI:  {{country.epiIndex}}
-
-<br/>
--->
